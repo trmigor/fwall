@@ -1,0 +1,17 @@
+language: go
+go:
+  - 1.16.x
+
+env:
+  global:
+    - GO111MODULE=auto
+
+install:
+  - go get -u github.com/golang/dep/cmd/dep
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.39.0
+
+script:
+  - make
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -f coverage/count.out
