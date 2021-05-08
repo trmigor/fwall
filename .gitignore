@@ -1,0 +1,12 @@
+# IDE folders
+.vscode/
+.idea/
+
+# OS X system files
+.DS_Store
+
+# Coverage files
+coverage/
+
+# Test binary
+*.test
