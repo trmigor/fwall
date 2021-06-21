@@ -1,0 +1,31 @@
+class ExampleClass2 matchAny
+ip saddr . ip protocol . udp dport { 9.9.9.9 . udp . 25 }
+!
+
+class ExampleClass1 matchAny
+ip protocol tcp
+ip saddr 8.8.8.8
+!
+
+policy ExamplePolicy2
+for ExampleClass2 accept
+for ExampleClass1 reject port-unreachable
+!
+
+policy ExamplePolicy1
+for ExampleClass1 accept
+for ExampleClass2 drop
+!
+
+zone ExampleZone2
+
+interface en1 in ExampleZone2
+
+zone ExampleZone1
+
+interface en0 in ExampleZone1
+
+zone_pair ExampleZone1 ExampleZone2 ExamplePolicy2
+
+zone_pair ExampleZone1 SelfZone ExamplePolicy1
+

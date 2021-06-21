@@ -1,9 +1,13 @@
 .PHONY: all
-all: env lint test
+all: env build test
 
 .PHONY: lint
 lint:
 	golangci-lint run
+
+.PHONY: build
+build:
+	go build -o fwall cmd/* 
 
 .PHONY: dep
 dep:
